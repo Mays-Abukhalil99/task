@@ -86,5 +86,22 @@ namespace onlineShop.Services.Cart
         }
 
 
+       public async Task<InventoryResource> AddItemToCart(AddItemModel AddedItem)
+       {
+            var ServiceResponse = new ServiceResponse<List<InventoryResource>>();
+            var flag = await _Context.Users.FirstOrDefaultAsync(x => x.Id == AddedItem.CartId);
+            if (flag == null)
+                throw new Exception($"Cart does not exist");
+            var entity = AddedItem.MapModelToEntityItem(0);
+            _Context.Inventories.Add(entity);
+            await _Context.SaveChangesAsync();
+            var addedEntity = await _Context.Inventories
+             .Include(c => c.Cartss)
+            .FirstOrDefaultAsync(c => c.Id == entity.Id);
+            return addedEntity.MapEntityToResourceItem();
+        }
+
+
+
     }
 }

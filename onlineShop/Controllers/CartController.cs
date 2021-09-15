@@ -59,10 +59,11 @@ namespace onlineShop.Controllers
             return Ok(await _ICartService.GetUserCartCheckOut(UserId));
         }
 
-        // [HttpGet("Id")]
-        //public async Task<ActionResult<ServiceResponse<CartResource>>> GetUserCartAsync(int UserId)
-        //{
-        //  return Ok(await _ICartService.GetUserCart(UserId));
-        //}
+        //add new item
+        [HttpPost("AddItemToCart")]
+        public async Task<ActionResult<List<ServiceResponse<CartResource>>>> AddItemToCartAsync(AddItemModel newItem)
+        {
+            return Ok(await _ICartService.AddItemToCart(newItem));
+        }
     }
 }
