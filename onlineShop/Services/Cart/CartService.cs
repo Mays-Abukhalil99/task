@@ -49,7 +49,6 @@ namespace onlineShop.Services.Cart
             .FirstOrDefaultAsync(c => c.Id == Id);
             return dbCarts.MapEntityToResourceCart();
         }
-
         public async Task<CartResource> GetUserCarts(int UserId)
         {
             var ServiceResponse = new ServiceResponse<CartResource>();
@@ -70,7 +69,6 @@ namespace onlineShop.Services.Cart
             }
             return null;
         }
-
         public async Task<CartResource> CartCheckOut(int Id)
         {
             var dbCarts = await _Context.Carts.Include(c => c.UserEntity).AsNoTracking().FirstOrDefaultAsync(c => c.Id == Id);
@@ -84,24 +82,43 @@ namespace onlineShop.Services.Cart
             dbCarts = await _Context.Carts.FirstOrDefaultAsync(c => c.Id == Id);
             return dbCarts.MapEntityToResourceCart();
         }
-
-
-       public async Task<InventoryResource> AddItemToCart(AddItemModel AddedItem)
+       public async Task<CartItemResource> AddItemToCart(AddItemModel AddedItem)
        {
-            var ServiceResponse = new ServiceResponse<List<InventoryResource>>();
-            var flag = await _Context.Users.FirstOrDefaultAsync(x => x.Id == AddedItem.CartId);
+            var ServiceResponse = new ServiceResponse<List<CartItemResource>>();
+            var flag = await _Context.CartItems.FirstOrDefaultAsync(x => x.Id == AddedItem.CartId);
             if (flag == null)
                 throw new Exception($"Cart does not exist");
-            var entity = AddedItem.MapModelToEntityItem(0);
-            _Context.Inventories.Add(entity);
-            await _Context.SaveChangesAsync();
-            var addedEntity = await _Context.Inventories
-             .Include(c => c.Cartss)
-            .FirstOrDefaultAsync(c => c.Id == entity.Id);
-            return addedEntity.MapEntityToResourceItem();
+            var entity = AddedItem.MapModelToEntityItem(0); 
+            if (flag.Count > 0)
+            {
+                _Context.CartItems.Add(entity);
+                await _Context.SaveChangesAsync();
+                var addedEntity = await _Context.CartItems
+                 .Include(c => c.CartEntity)
+                .FirstOrDefaultAsync(c => c.Id == entity.Id);
+                return addedEntity.MapEntityToResourceItem();
+            }
+            else
+            {
+                throw new Exception($"Item does not exist");
+            }
         }
 
-
+        public async Task<CartItemResource> DeleteItemCart(int CartId, int ItemId)
+        {
+            var ServiceResponse = new ServiceResponse<CartItemResource>();
+            var dbCartItem = await _Context.CartItems.FirstOrDefaultAsync(c => c.CartId == CartId && c.ItemId == ItemId );
+            if (dbCartItem != null)
+            {
+                _Context.CartItems.Remove(dbCartItem);
+                await _Context.SaveChangesAsync();
+                return dbCartItem.MapEntityToResourceItem();
+            }
+            else
+            {
+                throw new Exception($"Item with id {ItemId} does not exist");
+            }
+        }
 
     }
 }

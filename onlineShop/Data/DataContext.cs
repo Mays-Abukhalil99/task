@@ -14,6 +14,7 @@ namespace onlineShop.Data
         public DbSet<UserEntity> Users { get; set; }
         public DbSet<CartEntity> Carts { get; set; }
         public DbSet<InventoryEntity> Inventories { get; set; }
+        public DbSet<CartItemEntity> CartItems { get; set; }
 
     }
 

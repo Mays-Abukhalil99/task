@@ -61,9 +61,15 @@ namespace onlineShop.Controllers
 
         //add new item
         [HttpPost("AddItemToCart")]
-        public async Task<ActionResult<List<ServiceResponse<CartResource>>>> AddItemToCartAsync(AddItemModel newItem)
+        public async Task<ActionResult<List<ServiceResponse<CartItemResource>>>> AddItemToCartAsync(AddItemModel newItem)
         {
             return Ok(await _ICartService.AddItemToCart(newItem));
+        }
+
+        [HttpDelete("DeleteItemCart")]
+        public async Task<ActionResult<CartItemResource>> DeleteItemCartAsync(int CartId , int ItemId)
+        {
+            return Ok(await _ICartService.DeleteItemCart(CartId , ItemId));
         }
     }
 }

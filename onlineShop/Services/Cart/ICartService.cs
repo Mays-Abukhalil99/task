@@ -16,7 +16,9 @@ namespace onlineShop.Services.Cart
         Task<CartResource> GetUserCarts(int UserId);
         Task<CartResource> GetUserCartCheckOut(int UserId);
 
-        Task<InventoryResource> AddItemToCart(AddItemModel AddedItem);
+        Task<CartItemResource> AddItemToCart(AddItemModel AddedItem);
+
+        Task<CartItemResource> DeleteItemCart(int CartId, int ItemId);
 
 
 

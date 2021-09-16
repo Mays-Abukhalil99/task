@@ -13,6 +13,7 @@ namespace onlineShop.Entity
         public UserEntity UserEntity { get; set; }
         public int UserId { get; set; }
         public List<InventoryEntity> Inventoriess { get; set; }
+        public List<CartItemEntity> CartItemss { get; set; }
 
     }
 }

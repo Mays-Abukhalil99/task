@@ -11,30 +11,28 @@ namespace onlineShop.Mapping
     public static class ItemMapping
     {
 
-        public static InventoryEntity MapModelToEntityItem (this AddItemModel model, int? Id)
+        public static CartItemEntity MapModelToEntityItem (this AddItemModel model, int? Id)
         {
             if (model == null)
                 return null;
-            return new InventoryEntity()
+            return new CartItemEntity()
             {
                 Id = Id ?? 0,
                 CartId = model.CartId,
-                
-                
+                ItemId = model.ItemId,
+                Count = model.Count,
             };
         }
     
-        public static InventoryResource MapEntityToResourceItem(this InventoryEntity entity)
+        public static CartItemResource MapEntityToResourceItem(this CartItemEntity entity)
         {
             if (entity == null)
                 return null;
-            return new InventoryResource()
+            return new CartItemResource()
             {
                 Id = entity.Id,
-                Name = entity.Name,
-                UnitPrice = entity.UnitPrice,
-                AvailableStock = entity.AvailableStock,
-                CartId = entity.CartId,
+                Count = entity.Count,
+               
             };
         }
     }
