@@ -47,7 +47,7 @@ namespace onlineShop.Controllers
         {
             return Ok(await _IInventoryService.UpdateItem(UpdateItem, Id));
         }
-        [HttpDelete("{id}")]
+        [HttpDelete("(id)")]
         public async Task<ActionResult<InventoryResource>> DeleteAsync( int Id)
         {
             return Ok(await _IInventoryService.DeleteItem(Id));

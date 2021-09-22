@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using onlineShop.Data;
 
 namespace onlineShop.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210919102856_RemoveCartInventoryRelation")]
+    partial class RemoveCartInventoryRelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,12 +34,15 @@ namespace onlineShop.Migrations
                     b.Property<int>("TotalPrice")
                         .HasColumnType("int");
 
+                    b.Property<int?>("UserEntityId")
+                        .HasColumnType("int");
+
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserEntityId");
 
                     b.ToTable("Carts");
                 });
@@ -49,10 +54,16 @@ namespace onlineShop.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("CartEntityId")
+                        .HasColumnType("int");
+
                     b.Property<int>("CartId")
                         .HasColumnType("int");
 
                     b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("InventoryEntityId")
                         .HasColumnType("int");
 
                     b.Property<int>("ItemId")
@@ -60,9 +71,9 @@ namespace onlineShop.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CartId");
+                    b.HasIndex("CartEntityId");
 
-                    b.HasIndex("ItemId");
+                    b.HasIndex("InventoryEntityId");
 
                     b.ToTable("CartItems");
                 });
@@ -75,6 +86,9 @@ namespace onlineShop.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("AvailableStock")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CartId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -117,32 +131,26 @@ namespace onlineShop.Migrations
 
             modelBuilder.Entity("onlineShop.Entity.CartEntity", b =>
                 {
-                    b.HasOne("onlineShop.Entity.UserEntity", "User")
+                    b.HasOne("onlineShop.Entity.UserEntity", "UserEntity")
                         .WithMany("Cartss")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserEntityId");
 
-                    b.Navigation("User");
+                    b.Navigation("UserEntity");
                 });
 
             modelBuilder.Entity("onlineShop.Entity.CartItemEntity", b =>
                 {
-                    b.HasOne("onlineShop.Entity.CartEntity", "Cart")
+                    b.HasOne("onlineShop.Entity.CartEntity", "CartEntity")
                         .WithMany("CartItemss")
-                        .HasForeignKey("CartId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CartEntityId");
 
-                    b.HasOne("onlineShop.Entity.InventoryEntity", "Item")
+                    b.HasOne("onlineShop.Entity.InventoryEntity", "InventoryEntity")
                         .WithMany("CartItemss")
-                        .HasForeignKey("ItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("InventoryEntityId");
 
-                    b.Navigation("Cart");
+                    b.Navigation("CartEntity");
 
-                    b.Navigation("Item");
+                    b.Navigation("InventoryEntity");
                 });
 
             modelBuilder.Entity("onlineShop.Entity.CartEntity", b =>

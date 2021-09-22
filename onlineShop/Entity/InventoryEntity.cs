@@ -11,8 +11,8 @@ namespace onlineShop.Entity
         public string Name { get; set; }
         public int UnitPrice { get; set; }
         public int AvailableStock { get; set; }
-        public List<CartEntity> Cartss { get; set; }
-        public int CartId { get; set; }
+        //public List<CartEntity> Cartss { get; set; } // remove
+      //  public int CartId { get; set; } // remove
         public List<CartItemEntity> CartItemss { get; set; }
 
     }

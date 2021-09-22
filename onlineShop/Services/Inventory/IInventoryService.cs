@@ -9,11 +9,11 @@ namespace onlineShop.Services.Inventory
 {
     public interface IInventoryService
     {
-        Task<List<InventoryResource>> GetAll();
-        Task<InventoryResource> GetItemById(int Id);
-        Task<InventoryResource> AddItem(InventoryModel AddedItem);
-        Task<InventoryResource> UpdateItem(InventoryModel UpdatedItem, int Id);
-        Task<InventoryResource> DeleteItem(int Id);
+        Task<ServiceResponse<List<InventoryResource>>> GetAll();
+        Task<ServiceResponse<InventoryResource>> GetItemById(int Id);
+        Task<ServiceResponse<InventoryResource>> AddItem(InventoryModel AddedItem);
+        Task<ServiceResponse<InventoryResource>> UpdateItem(InventoryModel UpdatedItem, int Id);
+        Task<ServiceResponse<InventoryResource>> DeleteItem(int Id);
       
 
     }

@@ -9,16 +9,18 @@ namespace onlineShop.Services.Cart
 {
     public interface ICartService
     {
-        Task<List<CartResource>> GetAll();
-        Task<CartResource> AddCart(CartModel AddedCountries);
-        Task<CartResource> GetCartById(int Id);
-        Task<CartResource> CartCheckOut(int Id);
-        Task<CartResource> GetUserCarts(int UserId);
-        Task<CartResource> GetUserCartCheckOut(int UserId);
+        Task<ServiceResponse<List<CartResource>>> GetAll();
+        Task<ServiceResponse<CartResource>> AddCart(CartModel AddedCountries);
+        Task<ServiceResponse<CartResource>> GetCartById(int Id);
+        Task<ServiceResponse<CartResource>> CartCheckOut(int Id);
+        //Task<ServiceResponse<CartResource>> GetUserCarts(int UserId);
+       Task<ServiceResponse<List<CartResource>>> GetUserCarts(int UserId);
 
-        Task<CartItemResource> AddItemToCart(AddItemModel AddedItem);
+        Task<ServiceResponse<CartResource>> GetUserCartCheckOut(int UserId);
 
-        Task<CartItemResource> DeleteItemCart(int CartId, int ItemId);
+        Task<ServiceResponse<CartResource>> AddItemToCart(AddItemModel AddedItem);
+
+        Task<ServiceResponse<CartItemResource>> DeleteCartItem(int CartId, int ItemId);
 
 
 

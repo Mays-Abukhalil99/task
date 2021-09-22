@@ -14,10 +14,11 @@ namespace onlineShop.Mapping
             return new InventoryEntity()
             {
                 Id = Id ?? 0,
-                CartId = model.CartId,
+                //CartId = model.CartId,
                 Name = model.Name,
                 UnitPrice = model.UnitPrice,
                 AvailableStock = model.AvailableStock,
+               
             };
         }
         public static InventoryResource MapEntityToResource(this InventoryEntity entity)
@@ -30,7 +31,7 @@ namespace onlineShop.Mapping
                 Name = entity.Name,
                 UnitPrice = entity.UnitPrice,
                 AvailableStock = entity.AvailableStock,
-                CartId = entity.CartId,
+              //  CartId = entity.CartId,
             };
         }
     }

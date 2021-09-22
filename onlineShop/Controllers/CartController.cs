@@ -66,10 +66,10 @@ namespace onlineShop.Controllers
             return Ok(await _ICartService.AddItemToCart(newItem));
         }
 
-        [HttpDelete("DeleteItemCart")]
+        [HttpDelete("DeleteCartItem")]
         public async Task<ActionResult<CartItemResource>> DeleteItemCartAsync(int CartId , int ItemId)
         {
-            return Ok(await _ICartService.DeleteItemCart(CartId , ItemId));
+            return Ok(await _ICartService.DeleteCartItem(CartId , ItemId));
         }
     }
 }
