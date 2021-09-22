@@ -12,7 +12,6 @@ namespace onlineShop.Entity
         public bool CheckedOut { get; set; }
         public UserEntity User { get; set; }
         public int UserId { get; set; }
-        //public List<InventoryEntity> Inventoriess { get; set; } // remove.
         public List<CartItemEntity> CartItemss { get; set; }
 
     }

@@ -12,7 +12,5 @@ namespace onlineShop.Resource
         public string Name { get; set; }
         public string Email { get; set; }
         public List<CartEntity> Carts { get; set; }
-
-
     }
 }

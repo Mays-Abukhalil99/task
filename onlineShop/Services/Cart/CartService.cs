@@ -61,12 +61,10 @@ namespace onlineShop.Services.Cart
             if (dbCarts == null)
             {
                 return getServiceResponse<CartResource>(false, "Cart does not exist");
-
             }
             var result = getServiceResponse(true, "Cart for id you entered:", dbCarts.MapEntityToResourceCart());
             return result;
         }
-
         public async Task<ServiceResponse<List<CartResource>>> GetUserCarts(int UserId)
         {
             var ServiceResponse = new ServiceResponse<List<CartResource>>();
@@ -76,9 +74,6 @@ namespace onlineShop.Services.Cart
             var result = getServiceResponse(true, "User Carts:", resources);
             return result;
         }
-
-     
-
         public async Task<ServiceResponse<CartResource>> GetUserCartCheckOut(int UserId)
         {
             var ServiceResponse = new ServiceResponse<CartResource>();
@@ -101,7 +96,6 @@ namespace onlineShop.Services.Cart
                 return getServiceResponse<CartResource>(false, "Cart does not exist");
             }
             dbCarts.CheckedOut = true;
-            //mark checkedout as true;
             _Context.Update(dbCarts);
             await _Context.SaveChangesAsync();
             dbCarts = await _Context.Carts.FirstOrDefaultAsync(c => c.Id == Id);
@@ -120,7 +114,6 @@ namespace onlineShop.Services.Cart
             {
                 return getServiceResponse<CartResource>(false, "Item not found");
             }
-            //var dbCount = await _Context.CartItems.FirstOrDefaultAsync(x => x.Count  == AddedItem.Count ); // validate that the dbItem AvailableStock is >= AddedItem.Count
             if (dbItem.AvailableStock < AddedItem.Count)
             {
                 return getServiceResponse<CartResource>(false, "Item quantity is not enough");
@@ -137,13 +130,6 @@ namespace onlineShop.Services.Cart
             await updateAvailableAtstock(AddedItem.ItemId, AddedItem.Count);
             var addedEntity = await _Context.CartItems
             .FirstOrDefaultAsync(c => c.Id == entity.Id);
-           // return addedEntity.MapEntityToResourceItem(); // remove
-           // var items = dbCart.CartItemss.Select(x => x.MapEntityToResourceItem()).ToList();
-            // call the new method to get service response and pass status :true, message :added succesfully, store the result in var,
-            // and assign the Data field of the variable.
-            // ex: var result = getServ... ()
-            //result.Data = items
-            //return result;
             var result = getServiceResponse(true, "Item Added Succesfully", dbCart.MapEntityToResourceCart());
             return result;
         }
@@ -171,11 +157,6 @@ namespace onlineShop.Services.Cart
                 .FirstOrDefault(cart => cart.Id == AddedItem.CartId);
             var totalPrice = 0;
             cart.CartItemss.ForEach(cartItem => totalPrice += (cartItem.Count * cartItem.Item.UnitPrice));
-          //foreach(var cartItem in cart.CartItemss)
-          //  {
-          //      var totaltemp = cartItem.Count * cartItem.Item.UnitPrice;
-          //      totalPrice += totaltemp;
-          //  }
             cart.TotalPrice = totalPrice;
             await _Context.SaveChangesAsync();
         }
@@ -187,11 +168,9 @@ namespace onlineShop.Services.Cart
             cart.TotalPrice = totalPrice;
             await _Context.SaveChangesAsync();
         }
-        private async Task updateAvailableAtstock(int ItemId, int count, bool isDelete = false) // pass cart id; // isDelete pass as true in delete
+        private async Task updateAvailableAtstock(int ItemId, int count, bool isDelete = false) 
         {
             var inventory = await _Context.Inventories.FirstOrDefaultAsync(inventory => inventory.Id == ItemId);
-            //var availableStock = 0;
-            //inventory.CartItemss.Where(x => x.CartId == AddedItem.CartId).Select(c => availableStock += c.Count);
             if(isDelete)
                 inventory.AvailableStock += count;
             else
@@ -206,7 +185,5 @@ namespace onlineShop.Services.Cart
             ServiceResponse.Data = data;
             return ServiceResponse;
         }
-        // create static method "getServiceResponse(status,errorMessage)" it will create new serviceResponse with the parameters provided, and return it.
-        // Call this method above, and return its result.
     }
 }

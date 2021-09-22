@@ -44,28 +44,23 @@ namespace onlineShop.Controllers
         {
             return Ok(await _ICartService.CartCheckOut(Id));
         }
-
         // get user's carts bu userId
        [HttpGet("UserId")]
         public async Task<ActionResult<ServiceResponse<CartResource>>> GetUserCartsAsync(int UserId)
         {
             return Ok(await _ICartService.GetUserCarts(UserId));
         }
-
-
         [HttpGet("UserCartCheckOut")]
         public async Task<ActionResult<ServiceResponse<CartResource>>> GetUserCartCheckOutAsync(int UserId)
         {
             return Ok(await _ICartService.GetUserCartCheckOut(UserId));
         }
-
         //add new item
         [HttpPost("AddItemToCart")]
         public async Task<ActionResult<List<ServiceResponse<CartItemResource>>>> AddItemToCartAsync(AddItemModel newItem)
         {
             return Ok(await _ICartService.AddItemToCart(newItem));
         }
-
         [HttpDelete("DeleteCartItem")]
         public async Task<ActionResult<CartItemResource>> DeleteItemCartAsync(int CartId , int ItemId)
         {

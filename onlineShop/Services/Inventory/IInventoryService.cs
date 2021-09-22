@@ -14,7 +14,5 @@ namespace onlineShop.Services.Inventory
         Task<ServiceResponse<InventoryResource>> AddItem(InventoryModel AddedItem);
         Task<ServiceResponse<InventoryResource>> UpdateItem(InventoryModel UpdatedItem, int Id);
         Task<ServiceResponse<InventoryResource>> DeleteItem(int Id);
-      
-
     }
 }

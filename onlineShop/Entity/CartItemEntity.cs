@@ -9,9 +9,8 @@ namespace onlineShop.Entity
     {
         public int Id { get; set; }
         public int CartId { get; set; }
-        public int ItemId { get; set; } // configure the DbContext to consider this as foreign key for InventoryEntity.
+        public int ItemId { get; set; } 
         public int Count { get; set; }
-        
         public CartEntity Cart{ get; set; }
         public InventoryEntity Item{ get; set; }
 

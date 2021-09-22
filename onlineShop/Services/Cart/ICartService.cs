@@ -13,7 +13,6 @@ namespace onlineShop.Services.Cart
         Task<ServiceResponse<CartResource>> AddCart(CartModel AddedCountries);
         Task<ServiceResponse<CartResource>> GetCartById(int Id);
         Task<ServiceResponse<CartResource>> CartCheckOut(int Id);
-        //Task<ServiceResponse<CartResource>> GetUserCarts(int UserId);
        Task<ServiceResponse<List<CartResource>>> GetUserCarts(int UserId);
 
         Task<ServiceResponse<CartResource>> GetUserCartCheckOut(int UserId);

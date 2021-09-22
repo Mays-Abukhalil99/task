@@ -18,8 +18,6 @@ namespace onlineShop.Controllers
         {
             _authRepo = authRepo;
         }
-
-
         [HttpPost]
         [Route("Register")]
         public async Task<ActionResult<ServiceResponse<int>>> Register(UserModel request)
@@ -33,8 +31,6 @@ namespace onlineShop.Controllers
             }
             return Ok(response);
         }
-
-
         [HttpPost]
         [Route("Login")]
         public async Task<ActionResult<ServiceResponse<string>>> Login(UserLoginModel request)
@@ -42,14 +38,11 @@ namespace onlineShop.Controllers
             var response = await _authRepo.Login(
             request.Email, request.Password
             );
-
             if (!response.Success)
             {
                 return BadRequest(response);
             }
-
             return Ok(response);
         }
-    
     }
 }

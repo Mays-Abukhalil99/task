@@ -10,7 +10,5 @@ namespace onlineShop.Model
         public int CartId { get; set; }
         public int ItemId { get; set; }
         public int Count { get; set; }
-
-
     }
 }

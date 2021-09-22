@@ -14,6 +14,5 @@ namespace onlineShop.Entity
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
         public List<CartEntity> Cartss { get; set; }
-        //public int CartId { get; set; }
     }
 }

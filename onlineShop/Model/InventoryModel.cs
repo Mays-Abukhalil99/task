@@ -11,7 +11,5 @@ namespace onlineShop.Model
         public string Name { get; set; }
         public int UnitPrice { get; set; }
         public int AvailableStock { get; set; }
-
-
     }
 }

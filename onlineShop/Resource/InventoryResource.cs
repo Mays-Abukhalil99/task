@@ -11,8 +11,5 @@ namespace onlineShop.Resource
         public string Name { get; set; }
         public int UnitPrice { get; set; }
         public int AvailableStock { get; set; }
-        //public int CartId { get; set; }
-
-
     }
 }

@@ -23,7 +23,5 @@ namespace onlineShop.Model
         [Required(ErrorMessage = "Password is required")]
         [StringLength(24)]
         public string Password { get; set; }
- 
-
     }
 }

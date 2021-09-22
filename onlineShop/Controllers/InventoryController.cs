@@ -20,8 +20,6 @@ namespace onlineShop.Controllers
             _IInventoryService = iInventoryService;
 
         }
-
-
         //get all items
         [HttpGet("GetAll")]
         public async Task<ActionResult<ServiceResponse<List<InventoryResource>>>> GetAllAsync()
@@ -41,7 +39,6 @@ namespace onlineShop.Controllers
         {
             return Ok(await _IInventoryService.GetItemById(Id));
         }
-
         [HttpPut]
         public async Task<ActionResult<InventoryResource>> UpdateAsync(InventoryModel UpdateItem, int Id)
         {

@@ -12,14 +12,12 @@ namespace onlineShop.Data
     public class AuthRepository : IAuthRepository
     {
         private readonly DataContext _context;
-
         private readonly IConfiguration _configuration;
 
         public AuthRepository(DataContext context, IConfiguration configuration)
         {
             _context = context;
             _configuration = configuration;
-
         }
         public async Task<ServiceResponse<string>> Login(string email, string password)
         {
@@ -58,7 +56,6 @@ namespace onlineShop.Data
             await _context.SaveChangesAsync();
             return response;
         }
-
         public async Task<bool> UserExits(string email)
         {
             if (await _context.Users.AnyAsync(x => x.Email.ToLower().Equals(email.ToLower())))

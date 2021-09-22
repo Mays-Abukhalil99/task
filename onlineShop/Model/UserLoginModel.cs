@@ -8,8 +8,6 @@ namespace onlineShop.Model
 {
     public class UserLoginModel
     {
-  
-
         [Required(ErrorMessage = "Email is required")]
         [StringLength(24)]
         public string Email { get; set; }

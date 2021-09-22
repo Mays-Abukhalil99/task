@@ -10,7 +10,6 @@ namespace onlineShop.Mapping
 {
     public static class ItemMapping
     {
-
         public static CartItemEntity MapModelToEntityItem (this AddItemModel model, int? Id)
         {
             if (model == null)
@@ -23,7 +22,6 @@ namespace onlineShop.Mapping
                 Count = model.Count,
             };
         }
-    
         public static CartItemResource MapEntityToResourceItem(this CartItemEntity entity)
         {
             if (entity == null)

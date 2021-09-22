@@ -11,8 +11,6 @@ namespace onlineShop.Resource
         public int Id { get; set; }
         public int TotalPrice { get; set; }
         public bool CheckedOut { get; set; }
-       // public UserEntity UserEntity { get; set; }
         public int UserId { get; set; }
-        ///user id
     }
 }

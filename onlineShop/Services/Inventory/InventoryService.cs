@@ -42,7 +42,6 @@ namespace onlineShop.Services.Inventory
         public async Task<ServiceResponse<List<InventoryResource>>> GetAll()
         {
             var dbInventory = await _Context.Set<InventoryEntity>().ToListAsync();
-            // return dbInventory.ToList().Select(item => item.MapEntityToResource()).ToList();
             if (dbInventory == null)
             {
                 return getServiceResponse<List<InventoryResource>>(false, "No Items");
@@ -90,7 +89,6 @@ namespace onlineShop.Services.Inventory
             var result = getServiceResponse(true, "Item deleted Succsessfully", dbInventory.MapEntityToResource());
             return result;
         }
-
         private static ServiceResponse<T> getServiceResponse<T>(bool status, string errorMessage, T data = null) where T : class
         {
             var ServiceResponse = new ServiceResponse<T>();
